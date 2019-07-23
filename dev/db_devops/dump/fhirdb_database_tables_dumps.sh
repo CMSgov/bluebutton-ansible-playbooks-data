@@ -2,7 +2,7 @@
 #################################################
 # fhirdb_database_tables_dumps.sh
 # This is to run pg_dump for all tables in the public schema
-# This script sends email with a summary report of the table dumps and the upload to S3.
+# This script sends email with a summary report of the table dumps and then upload to S3.
 # Created by Jo Kumedzro
 # Create Date: 15/09/2017
 # modified Date: 12/07/2018
