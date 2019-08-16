@@ -13,11 +13,11 @@ NUMBENESTOQUERY=$3
 databaseQueries="/bluebutton-ansible-playbooks-data/dev/database-queries.txt"
 
 # select random sample of Beneficiaries.beneficiaryId
-randomBeneIds=$(psql -U $USERNAME -d $DBNAME -c "SELECT beneficiaryId FROM Beneficiaries ORDER BY RANDOM() LIMIT $NUMBENESTOQUERY")
+randomBeneIds=( $(psql -U $USERNAME -d $DBNAME -c "SELECT beneficiaryId FROM Beneficiaries ORDER BY RANDOM() LIMIT $NUMBENESTOQUERY") )
 
 # set queries to timeout after 15 seconds
 setTimeout() {
-	psql -U $USERNAME -d $DBNAME -c "SET statement_timeout TO 15000"
+	$(psql -U $USERNAME -d $DBNAME -c "SET statement_timeout TO 15000")
 }
 
 # check if query exit status returned anything other than 0
@@ -36,7 +36,7 @@ runPsqlQuery() {
 
 timedout=false
 numberOfTimeouts=0
-for beneId in $randomBeneIds
+for beneId in "${randomBeneIds[@]}"
 do
 	echo "Running all DB queries for beneId = $beneId"
 	
