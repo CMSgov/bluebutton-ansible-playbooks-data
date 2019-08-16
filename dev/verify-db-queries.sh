@@ -55,7 +55,7 @@ do
 	while IFS= read -r line
 	do
 		setTimeout()
-  		runPsqlQuery($line)
+  		runPsqlQuery $line
   		checkForTimeout()
 	done
 	
