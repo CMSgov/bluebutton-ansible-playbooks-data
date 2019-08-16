@@ -31,9 +31,7 @@ checkForTimeout() {
 
 runPsqlQuery() {
 	dbQuery= $1
-	setTimeout()
 	psql -U $USERNAME -d $DBNAME $dbQuery
-	checkForTimeout()
 }
 
 timedout= false
@@ -56,7 +54,9 @@ do
 	# run all DB queries once for the current beneId
 	while IFS= read -r line
 	do
+		setTimeout()
   		runPsqlQuery($line)
+  		checkForTimeout()
 	done
 	
 	if [$timedout]
