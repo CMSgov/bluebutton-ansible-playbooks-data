@@ -13,7 +13,7 @@ NUMBENESTOQUERY=$3
 databaseQueries="/bluebutton-ansible-playbooks-data/dev/database-queries.txt"
 
 # select random sample of Beneficiaries.beneficiaryId
-randomBeneIds=$(psql -U $USERNAME -d $DBNAME -c "SELECT beneficiaryId FROM Beneficiaries ORDER BY RANDOM() LIMIT $NUMBENESTOQUERY"`
+randomBeneIds=$(psql -U $USERNAME -d $DBNAME -c "SELECT beneficiaryId FROM Beneficiaries ORDER BY RANDOM() LIMIT $NUMBENESTOQUERY")
 
 # set queries to timeout after 15 seconds
 setTimeout() {
