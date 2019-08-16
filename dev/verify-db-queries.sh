@@ -28,7 +28,7 @@ runPsqlQuery() {
 	dbQuery=$1
 	psql -U $USERNAME -d $DBNAME <<EOF
 	SET statement_timeout TO 15000;
-	$dbQuery
+	${dbQuery}
 	EOF
 }
 
