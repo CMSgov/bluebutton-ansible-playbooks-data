@@ -190,33 +190,33 @@ while read -r beneficiaryId; do
   query "${queryByClaimIdCarrier/CLAIM_ID/${carrierClaimId}}" &> /dev/null
   checkQueryResult "$?" "${beneficiaryId}" "${queryByClaimIdCarrier/CLAIM_ID/${carrierClaimId}}"
   
-  dmeClaimId="$(query "${queryForClaimIdCarrier/BENE_ID/${beneficiaryId}}")"
-  query "${queryByClaimIdCarrier/CLAIM_ID/${dmeClaimId}}" &> /dev/null
-  checkQueryResult "$?" "${beneficiaryId}" "${queryByClaimIdCarrier/CLAIM_ID/${dmeClaimId}}"
+  dmeClaimId="$(query "${queryForClaimIdDme/BENE_ID/${beneficiaryId}}")"
+  query "${queryByClaimIdDme/CLAIM_ID/${dmeClaimId}}" &> /dev/null
+  checkQueryResult "$?" "${beneficiaryId}" "${queryByClaimIdDme/CLAIM_ID/${dmeClaimId}}"
   
-  hhaClaimId="$(query "${queryForClaimIdCarrier/BENE_ID/${beneficiaryId}}")"
-  query "${queryByClaimIdCarrier/CLAIM_ID/${hhaClaimId}}" &> /dev/null
-  checkQueryResult "$?" "${beneficiaryId}" "${queryByClaimIdCarrier/CLAIM_ID/${hhaClaimId}}"
+  hhaClaimId="$(query "${queryForClaimIdHha/BENE_ID/${beneficiaryId}}")"
+  query "${queryByClaimIdHha/CLAIM_ID/${hhaClaimId}}" &> /dev/null
+  checkQueryResult "$?" "${beneficiaryId}" "${queryByClaimIdHha/CLAIM_ID/${hhaClaimId}}"
   
-  hospiceClaimId="$(query "${queryForClaimIdCarrier/BENE_ID/${beneficiaryId}}")"
-  query "${queryByClaimIdCarrier/CLAIM_ID/${hospiceClaimId}}" &> /dev/null
-  checkQueryResult "$?" "${beneficiaryId}" "${queryByClaimIdCarrier/CLAIM_ID/${hospiceClaimId}}"
+  hospiceClaimId="$(query "${queryForClaimIdHospice/BENE_ID/${beneficiaryId}}")"
+  query "${queryByClaimIdHospice/CLAIM_ID/${hospiceClaimId}}" &> /dev/null
+  checkQueryResult "$?" "${beneficiaryId}" "${queryByClaimIdHospice/CLAIM_ID/${hospiceClaimId}}"
   
-  inpatientClaimId="$(query "${queryForClaimIdCarrier/BENE_ID/${beneficiaryId}}")"
-  query "${queryByClaimIdCarrier/CLAIM_ID/${inpatientClaimId}}" &> /dev/null
-  checkQueryResult "$?" "${beneficiaryId}" "${queryByClaimIdCarrier/CLAIM_ID/${inpatientClaimId}}"
+  inpatientClaimId="$(query "${queryForClaimIdInpatient/BENE_ID/${beneficiaryId}}")"
+  query "${queryByClaimIdInpatient/CLAIM_ID/${inpatientClaimId}}" &> /dev/null
+  checkQueryResult "$?" "${beneficiaryId}" "${queryByClaimIdInpatient/CLAIM_ID/${inpatientClaimId}}"
   
-  outpatientClaimId="$(query "${queryForClaimIdCarrier/BENE_ID/${beneficiaryId}}")"
-  query "${queryByClaimIdCarrier/CLAIM_ID/${outpatientClaimId}}" &> /dev/null
-  checkQueryResult "$?" "${beneficiaryId}" "${queryByClaimIdCarrier/CLAIM_ID/${outpatientClaimId}}"
+  outpatientClaimId="$(query "${queryForClaimIdOutpatient/BENE_ID/${beneficiaryId}}")"
+  query "${queryByClaimIdOutpatient/CLAIM_ID/${outpatientClaimId}}" &> /dev/null
+  checkQueryResult "$?" "${beneficiaryId}" "${queryByClaimIdOutpatient/CLAIM_ID/${outpatientClaimId}}"
   
-  pdeClaimId="$(query "${queryForClaimIdCarrier/BENE_ID/${beneficiaryId}}")"
-  query "${queryByClaimIdCarrier/CLAIM_ID/${pdeClaimId}}" &> /dev/null
-  checkQueryResult "$?" "${beneficiaryId}" "${queryByClaimIdCarrier/CLAIM_ID/${pdeClaimId}}"
+  pdeEventId="$(query "${queryForEventIdPde/BENE_ID/${beneficiaryId}}")"
+  query "${queryByEventIdPde/CLAIM_ID/${pdeEventId}}" &> /dev/null
+  checkQueryResult "$?" "${beneficiaryId}" "${queryByEventIdPde/CLAIM_ID/${pdeEventId}}"
   
-  snfClaimId="$(query "${queryForClaimIdCarrier/BENE_ID/${beneficiaryId}}")"
-  query "${queryByClaimIdCarrier/CLAIM_ID/${snfClaimId}}" &> /dev/null
-  checkQueryResult "$?" "${beneficiaryId}" "${queryByClaimIdCarrier/CLAIM_ID/${snfClaimId}}"
+  snfClaimId="$(query "${queryForClaimIdSnf/BENE_ID/${beneficiaryId}}")"
+  query "${queryByClaimIdSnf/CLAIM_ID/${snfClaimId}}" &> /dev/null
+  checkQueryResult "$?" "${beneficiaryId}" "${queryByClaimIdSnf/CLAIM_ID/${snfClaimId}}"
 
   beneficiaryIdIndex=$(( beneficiaryIdIndex + 1 ))
 done <<< "${beneficiaryIds}"
