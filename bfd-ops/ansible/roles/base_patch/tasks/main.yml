@@ -5,3 +5,25 @@
 - name: Apply security patches
   become: yes
   shell: yum update-minimal --security -y
+
+- name: Add optional RHEL repo
+  become: yes
+  command: yum-config-manager --enable rhel-7-server-optional-rpms
+
+- name: install the latest version of Apache
+  become: yes
+  yum:
+    name: ntp
+    state: latest
+
+- name: Add amazon ntp server to ntp.conf
+  lineinfile:
+    path: /etc/ntp.conf
+    insertafter: EOF
+    line: 'server 169.254.169.123 prefer iburst'
+  become: yes
+
+- name: Restart ntpd
+  service:
+    name: ntpd
+    state: restarted

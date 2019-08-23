@@ -1,0 +1,40 @@
+---
+- name: Configure Build Server
+  hosts: all
+  user: ec2-user
+  become: true
+#  gather_facts: no
+  vars_files:
+    - host_vars/builds.bfd-mgmt.cmscloud.local/vault.yml
+  vars:
+    ansible_ssh_pipelining: no
+
+  tasks:
+    - import_role:
+        name: install_epel_repo
+    - import_role:
+        name: rhel_prep
+    - import_role:
+        name: base_patch
+    - import_role:
+        name: rhel_python_pip
+
+    - name: Download App Server
+      maven_artifact:
+        group_id: org.wildfly
+        artifact_id: wildfly-dist
+        version: 8.1.0.Final
+        extension: tar.gz
+        dest: /tmp/wildfly-dist.tar.gz
+
+    # FIXME The WAR should be an input to this build step; using a locally built copy for now
+    - name: Copy WAR from Local Path
+      copy:
+        src: "~/.m2/repository/gov/hhs/cms/bluebutton/fhir/bluebutton-server-app/1.0.0-SNAPSHOT/bluebutton-server-app-1.0.0-SNAPSHOT.war"
+        dest: "{{ data_server_war_local_dir }}/{{ data_server_war_name }}"
+#      become: true
+#      become_user: "{{ data_server_user }}"
+
+    - import_role:
+        name: data-server
+

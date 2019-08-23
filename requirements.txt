@@ -10,3 +10,4 @@ pycrypto
 awscli
 boto
 boto3
+lxml
