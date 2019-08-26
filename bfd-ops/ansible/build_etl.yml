@@ -2,20 +2,24 @@
 ##
 # Configures the LSS zone's build server (e.g. Jenkins).
 ##
-- name: Install and Configure Build Server
+
+- name: Configure ETL Server
   hosts: all
-  user: ec2-user
   become: true
+  remote_user: ec2-user
   gather_facts: no
-  vars_files:
-    - host_vars/builds.bfd-mgmt.cmscloud.local/vault.yml
   vars:
     ansible_ssh_pipelining: no
+    env: "dev"
+    sub_zone: "app"
+    sg_zone: "appserver"
+    splunk_target_layer: "app"
+    repo: "https://github.com/CMSgov/bluebutton-web-deployment.git"
+    version: "master"
+    var_files:
+      - "group_vars/all/main.yml"
+      - "group_vars/{{ env }}/vault.yml"
 
   tasks:
     - import_role:
-        name: rhel_prep
-    - import_role:
-        name: install_epel_repo
-     - import_role:
-         name: base_patch
+        name: data_pipeline
