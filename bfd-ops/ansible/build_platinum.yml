@@ -7,8 +7,6 @@
   user: ec2-user
   become: true
   gather_facts: no
-  vars_files:
-    - host_vars/builds.bfd-mgmt.cmscloud.local/vault.yml
   vars:
     ansible_ssh_pipelining: no
 
@@ -19,3 +17,5 @@
         name: install_epel_repo
      - import_role:
          name: base_patch
+
+# Future - Cloudwatch install. 
